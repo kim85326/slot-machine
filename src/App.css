@@ -1,32 +1,130 @@
-.App {
-  text-align: center;
+.wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.slot-machine {
+    position: relative;
+    padding: 24px;
+    border: 5px solid #5bdb95;
+    border-radius: 50px;
+    background-color: #05386b;
+    box-shadow: 5px 5px 0 #f4f2e0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.slot-machine-header {
+    color: white;
+    text-align: center;
+    margin: 0 0 8px;
+    padding: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.slot-machine-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #05386b;
+    border-radius: 40px;
+    overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.slot-machine-body::before,
+.slot-machine-body::after {
+    content: " ";
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+}
+
+.slot-machine-body::before {
+    box-shadow: inset 0 -10px 15px rgba(0, 0, 0, .2);
+}
+
+.slot-machine-body::after {
+    box-shadow: inset 0 10px 15px rgba(0, 0, 0, .2);
+}
+
+.screen {
+    width: 450px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.handler {
+    position: absolute;
+    top: 50%;
+    right: -55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.handler.active .vertical-stick {
+    top: -10px;
+    height: 20px;
+}
+
+.handler.active .ball {
+    top: 0px;
+}
+
+.horizontal-stick {
+    position: absolute;
+    top: -10px;
+    right: -35px;
+    width: 80px;
+    height: 30px;
+    border: 5px solid #5bdb95;
+    border-radius: 0 20px 20px 0;
+    background-color: #05386b;
+}
+
+.vertical-stick {
+    position: absolute;
+    top: -110px;
+    right: -40px;
+    width: 30px;
+    height: 130px;
+    border: 5px solid #5bdb95;
+    border-radius: 20px;
+    background-color: #05386b;
+    transition: .35s;
+}
+
+.ball {
+    outline: none;
+    position: absolute;
+    top: -155px;
+    right: -55px;
+    width: 70px;
+    height: 70px;
+    border: 5px solid #5bdb95;
+    border-radius: 50%;
+    background-color: #05386b;
+    cursor: pointer;
+    transition: .5s;
+    animation: ballLight 1s infinite alternate-reverse linear;
+}
+
+.ball:disabled {
+    cursor: not-allowed;
+}
+
+@keyframes ballLight {
+    from {
+        border: solid 5px white;
+        box-shadow: 0px 0px 10px white;
+    }
+    to {
+        border: solid 5px white;
+        box-shadow: 0px 0px 30px white;
+    }
 }

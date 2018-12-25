@@ -5,7 +5,8 @@ class Slot extends Component {
   constructor() {
     super();
     this.state = {
-      currentDeg: 0
+      currentDeg: 0,
+      width: 150
     };
     this.start = this.start.bind(this);
   }
@@ -34,6 +35,7 @@ class Slot extends Component {
     for (const index in this.props.config.items) {
       const item = this.props.config.items[index];
       const itemStyle = {
+        width: `${this.state.width}px`,
         transform: `rotateX(${this.getItemRotate() * index}deg)
           translateZ(${this.getItemTranslateZ()}px)`
       };
@@ -53,7 +55,11 @@ class Slot extends Component {
   }
 
   getItemTranslateZ() {
-    return 150 / 2 / Math.tan((this.getItemRotate() / 2 / 180) * Math.PI);
+    return (
+      this.state.width /
+      2 /
+      Math.tan((this.getItemRotate() / 2 / 180) * Math.PI)
+    );
   }
 
   start() {
